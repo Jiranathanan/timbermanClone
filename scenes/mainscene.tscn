@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/img_fundoChao.png" type="Texture" id=2]
@@ -6,9 +6,6 @@
 [ext_resource path="res://assets/felpudoIdle.png" type="Texture" id=4]
 [ext_resource path="res://assets/felpudoBate.png" type="Texture" id=5]
 [ext_resource path="res://assets/grave.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Barril.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/barrilEsq.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/barrilDir.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 
@@ -103,16 +100,8 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
-[node name="Barril" parent="." instance=ExtResource( 7 )]
+[node name="Barris" type="Node2D" parent="."]
 
-transform/pos = Vector2( 355.489, 1099.05 )
-
-[node name="BarrilEsq" parent="." instance=ExtResource( 8 )]
-
-transform/pos = Vector2( 357.724, 926.676 )
-
-[node name="BarrilDir" parent="." instance=ExtResource( 9 )]
-
-transform/pos = Vector2( 355.48, 756.614 )
+[node name="DestBarris" type="Node2D" parent="."]
 
 
