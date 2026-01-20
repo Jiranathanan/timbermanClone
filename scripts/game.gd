@@ -8,6 +8,7 @@ onready var felpudo = get_node("Felpudo")
 onready var camera = get_node("Camera")
 onready var barris = get_node("Barris")
 onready var destbarris = get_node("DestBarris")
+onready var barra = get_node("Barra")
 
 # ultini = last enemy which means if the last barrel had enemy or not
 var ultini
@@ -16,6 +17,8 @@ func _ready():
 	randomize()
 	set_process_input(true)
 	gerarIni()
+	
+	barra.connect("perdeu", self, "perder")
 	
 func _input(event):
 	event = camera.make_input_local(event)
@@ -35,6 +38,8 @@ func _input(event):
 			
 			aleaBarril(Vector2(360, 1090 - 10*172))
 			descer()
+			
+			barra.add(0.014)
 			
 			if verif():
 				perder()
@@ -91,3 +96,5 @@ func descer():
 		
 func perder():
 	felpudo.morrer()
+	barra.set_process(false)
+	set_process_input(false)
