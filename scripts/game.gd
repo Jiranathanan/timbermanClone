@@ -26,8 +26,22 @@ func _input(event):
 		else:
 			felpudo.dir()
 		
-		felpudo.bater()
+		if !verif():
+			felpudo.bater()
+			var prim = barris.get_children()[0]
+			barris.remove_child(prim)
+			destbarris.add_child(prim)
+			prim.dest(felpudo.lado)
+			
+			aleaBarril(Vector2(360, 1090 - 10*172))
+			descer()
+			
+			if verif():
+				perder()
 		
+		else:
+			perder()
+			
 # random barril
 func aleaBarril(pos):
 	var num = rand_range(0, 3)
@@ -59,3 +73,21 @@ func gerarIni():
 		
 	for i in range(3, 10):
 		aleaBarril(Vector2(360, 1090 - i*172))
+		
+# verify
+func verif():
+	# var side = felpudo.side
+	var lado = felpudo.lado
+	# use the first barrel
+	var prim = barris.get_children()[0]
+	if lado == felpudo.ESQ and prim.is_in_group("barrilEsq") or lado == felpudo.DIR and prim.is_in_group("barrilDir"):
+		return true
+	else:
+		return false
+		
+func descer():
+	for b in barris.get_children():
+		b.set_pos(b.get_pos() + Vector2(0, 172))
+		
+func perder():
+	felpudo.morrer()

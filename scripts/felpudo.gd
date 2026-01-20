@@ -37,3 +37,10 @@ func dir():
 func bater():
 	anim.play("Bater")
 	
+func morrer():
+	anim.stop()
+	idle.hide()
+	bate.hide()
+	grave.show()
+	
+	
