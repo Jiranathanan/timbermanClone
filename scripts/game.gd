@@ -10,8 +10,16 @@ onready var barris = get_node("Barris")
 onready var destbarris = get_node("DestBarris")
 onready var barra = get_node("Barra")
 
+onready var labelpontos = get_node("Control/Pontos")
+
 # ultini = last enemy which means if the last barrel had enemy or not
 var ultini
+var pontos = 0
+var estado = JOGANDO
+
+# playing
+const JOGANDO =  1
+const PERDEU = 2
 
 func _ready():
 	randomize()
@@ -22,7 +30,7 @@ func _ready():
 	
 func _input(event):
 	event = camera.make_input_local(event)
-	if event.type == InputEvent.SCREEN_TOUCH and event.pressed:
+	if event.type == InputEvent.SCREEN_TOUCH and event.pressed and estado == JOGANDO:
 		
 		if event.pos.x < 360:
 			felpudo.esq()
@@ -40,6 +48,9 @@ func _input(event):
 			descer()
 			
 			barra.add(0.014)
+			
+			pontos += 1
+			labelpontos.set_text(str(pontos))
 			
 			if verif():
 				perder()
@@ -97,4 +108,10 @@ func descer():
 func perder():
 	felpudo.morrer()
 	barra.set_process(false)
-	set_process_input(false)
+	#set_process_input(false)
+	estado = PERDEU
+	get_node("Timer").start()
+
+
+func _on_Timer_timeout():
+	get_tree().reload_current_scene()
